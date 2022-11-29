@@ -2,6 +2,7 @@ import { SendInteractiveMsg } from 'flowTypes';
 import React, { useEffect, useState } from 'react';
 
 import i18n from 'config/i18n';
+import styles from './SendInteractiveMsg.module.scss';
 import { getHeader, getMsgBody } from './helpers';
 import { renderAssetList } from '../helpers';
 import { AssetType } from 'store/flowContext';
@@ -12,6 +13,7 @@ import { getAsset } from 'external';
 import Loading from 'components/loading/Loading';
 import { addAsset, DispatchWithState } from 'store/thunks';
 import { bindActionCreators } from 'redux';
+import { ReactComponent as EditIcon } from 'edit.svg';
 
 export const PLACEHOLDER = i18n.t(
   'actions.send_interactive_msg.placeholder',
@@ -95,6 +97,11 @@ const SendInteractiveMsgComp: React.SFC<SendInteractiveMsg> = ({
       </div>
       <div>{body ? body : <Loading units={5} color="#3498db" size={7} />}</div>
       {labelsList}
+      <div className={styles.Edit}>
+        <a href={`window.location.origin/${id}/edit`} target="_blank" rel="noopener noreferrer">
+          <EditIcon />
+        </a>
+      </div>
     </div>
   );
 };
